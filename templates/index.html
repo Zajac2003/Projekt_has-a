@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Panel danych hashowanych</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  </head>
+  <body>
+    <div class="bg-orb bg-orb-left"></div>
+    <div class="bg-orb bg-orb-right"></div>
+
+    <main class="shell">
+      <section class="hero card">
+        <div>
+          <p class="eyebrow">Przeglądarka danych</p>
+          <h1>Interaktywny panel do analizy rekordów z hashami</h1>
+          <p class="lead">
+            Demo do prezentacji: wyszukiwanie, filtrowanie, podgląd algorytmu i symulacja analizy rekordu.
+          </p>
+        </div>
+        <div class="hero-metrics">
+          <div class="metric">
+            <span>Wiersze</span>
+            <strong id="totalRows">0</strong>
+          </div>
+          <div class="metric">
+            <span>Widoczne</span>
+            <strong id="visibleRows">0</strong>
+          </div>
+          <div class="metric">
+            <span>Status</span>
+            <strong>Demo</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="toolbar card">
+        <label class="searchbox" for="searchInput">
+          <span>Szukaj</span>
+          <input id="searchInput" type="search" placeholder="Nazwa, email, hash, algorytm..." />
+        </label>
+        <button id="resetButton" class="ghost-button" type="button">Wyczyść filtr</button>
+      </section>
+
+      <section class="table-card card">
+        <div class="table-head">
+          <div>
+            <h2>Rekordy</h2>
+            <p>Każdy wiersz można przefiltrować i uruchomić symulację analizy.</p>
+          </div>
+          <div class="legend">
+            <span class="dot dot-live"></span> Widoczny
+            <span class="dot dot-warn"></span> Analiza
+            <span class="dot dot-ok"></span> Wynik demo
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Użytkownik</th>
+                <th>Email</th>
+                <th>Hash</th>
+                <th>Algorytm</th>
+                <th>Czas analizy</th>
+                <th>Status</th>
+                <th>Akcja</th>
+              </tr>
+            </thead>
+            <tbody id="rowsBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <aside class="drawer card" id="drawer" aria-live="polite">
+      <div class="drawer-top">
+        <div>
+          <p class="eyebrow">Szczegóły</p>
+          <h3 id="drawerTitle">Wybierz rekord</h3>
+        </div>
+        <button id="drawerClose" class="icon-button" type="button">×</button>
+      </div>
+      <p id="drawerText" class="drawer-text">Kliknij „Odszyfruj”, aby zobaczyć symulowany wynik analizy.</p>
+      <div class="drawer-result">
+        <span>Wynik</span>
+        <strong id="drawerCandidate">—</strong>
+      </div>
+      <div class="drawer-meta">
+        <div>
+          <span>Szacowany czas analizy</span>
+          <strong id="drawerTime">—</strong>
+        </div>
+      </div>
+    </aside>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </body>
+  </html>
